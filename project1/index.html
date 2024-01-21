@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Gazetteer</title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <!--Leaflet CSS-->
+        <link href="libs/css/leaflet.css" rel="stylesheet" crossorigin="anonymous">
+        <!--Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!--My CSS-->
+        <link rel="stylesheet" href="libs/css/index.css">
+        <!--Extra Markers-->
+        <link href="libs/css/leaflet.extra-markers.min.css">
+        <!--Font Awesome JS-->
+        <script src="https://kit.fontawesome.com/835c55f77f.js" crossorigin="anonymous"></script>  
+        <!--Easy Button-->
+        <link rel="stylesheet" href="libs/css/easyButton.css">
+        <!--Leaflet JS-->
+        <script src="http://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <!--Author-->
+        <meta name="author" content="Jasmine Taylor">
+        <!--JQuery-->
+        <script src="libs/js/jquery-3.6.0.min.js" type="application/javascript"></script>
+    </head>
+    <body>
+        <div id="preloader" style="display: none;"></div>
+        <div class="container">
+            <div id="nav">
+                <select id="selectCountry">
+                   <option id = "selCountry" value="">Select Country</option>
+                   <button type="button" id="btnRun" data-bs-toggle="modal" data-bs-target="#modalCountry">
+                </select>
+            </div>
+        </div>
+        <!--Map-->
+        <div id="map" class="leaflet-container" style="position: relative" tab-index="0">
+            <div class="leaflet-control-container">
+                <div class="leaflet-top leaflet-left">
+                    <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                        <a class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button" aria-label="Zoom in">+</a>
+                        <a class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button" aria-label="Zoom out">-</a>
+                    </div>
+                    <div class="leaflet-bar easy-button-container leaflet-control">
+                        <button class="easy-button-button leaflet-bar-part leaflet-interactive" id="countryBtn" type="button" data-target="#modalCountry" title="Country Information" data-toggle="modal" style="height:35px; width:37px; padding:5px;">
+                            <i class="fa-solid fa-earth-americas"></i>                        
+                        </button>
+                    </div>
+                    <div class="leaflet-bar easy-button-container leaflet-control">
+                        <button class="easy-button-button leaflet-bar-part leaflet-interactive" id="weatherBtn" type="button" data-target="#modalWeather" title="Weather" data-toggle="modal" style="height:35px; width:37px; padding:5px;">
+                            <i class="fa-solid fa-cloud-sun"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Country Modal-->
+        <div class="modal" id="modalCountry" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h3 class="modal-header" id="countryName">Country:</h3>
+                    <button type="button" class="btn-close btn-close-white" id="closeBtnCountry" data-bs-modal="dismiss" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table ">
+                        <tr>
+                            <td>Capital</td>
+                            <td class='ti'><span class=countryCapital></span></td>
+                        </tr>
+                        <tr>
+                            <td>Population</td>
+                            <td class='ti'><span id=txtpopulation></span></td>
+                        </tr>
+                        <tr>
+                            <td>Continent</td>
+                            <td class='ti'><span class=countryContinent></span></td>
+                        </tr>
+                        <tr>
+                            <td>Area</td>
+                            <td class='ti'><span id=countryArea></span>km<sup>2</sup></td>
+                        </tr>
+                </table>
+                </br>
+                <span id="item"></span>
+                <table class="table">
+                    <th>
+                        Wikipedia
+                    </th>
+                    <tbody>
+                    <tr>
+                        <td class="wikitd"><iframe src='' style="width:100%; height: 500px;" id="link2" target=_blank ></iframe></td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--Weather Modal-->
+        <div class="modal" id="modalWeather" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h3 class="modal-header" id="staticBackdropLabel">Weather Forecast</h3>
+                    <button type="button" class="btn-close btn-close-white" id="closeBtnWeather" data-bs-modal="dismiss" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container flex" id="weatherMain">
+                        <div class="row">
+                            <div class="col">Current Temperature:</div>
+                            <div class="col" id="currentTemp"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Minimum Temperature:</div>
+                            <div class="col" id="minTemp"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Maximum Temperature:</div>
+                            <div class="col" id="maxTemp"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!--Alert-->
+        <div class="modal fade" id="alert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">No Country Selected</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          
+                  </button>
+                </div>
+                  <div class="modal-body">
+               <p>Please select a country from the search bar</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!--JS-->
+        <script src="libs/js/leaflet.js" crossorigin></script>
+        <script src="libs/js/leaflet-providers.js"></script>
+        <script src="libs/js/script.js"></script>
+        <script src="libs/js/leaflet.extra-markers.min.js"></script>
+        <script src="libs/js/easyButton.js"></script>
+    </body>
+</html>
