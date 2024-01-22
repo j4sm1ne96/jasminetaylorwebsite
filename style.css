@@ -88,14 +88,6 @@ td {
     font-size: 20px;
 }
 
-body {
-  display: grid;
-  align-content: center;
-  gap: 2rem;
-  color: var(--color);
-  background: var(--bgColor);
-}
-
 #h1-experience {
   text-align: center;
   padding-bottom: 20px;
@@ -267,7 +259,6 @@ ul li:not(:last-child) {
   }
 }
 
-
 /* glider */
 .cImg {
     height: 20vw;
@@ -281,6 +272,24 @@ ul li:not(:last-child) {
 
 section {
     padding: 80px 50px;
+}
+
+/* Articles Section */
+
+#articles-title {
+  color: white;
+  padding-bottom: 20px;
+}
+
+#articles {
+  background: #868784;
+  font-size: 20px;
+}
+
+.card-text {
+  border-top: 1px solid grey;
+  padding-top: 5px;
+  font-size: 18px;
 }
 
 /* Footer */

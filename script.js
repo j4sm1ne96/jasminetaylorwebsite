@@ -1,7 +1,7 @@
 //About Me
 
 var typed = new Typed('#typed',{
-    strings:["Technical Author.", "Developer.", "Teacher.", "Programmer.", "Team Member!", "Collaborator.", "Coder."],
+    strings:["Web Developer.", "Technical Author.", "Teacher.", "Programmer.", "Team Member!", "Collaborator.", "Coder."],
     backSpeed: 40,
     typeSpeed: 40,
     loop: true
